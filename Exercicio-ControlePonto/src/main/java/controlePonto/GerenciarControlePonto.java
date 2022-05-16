@@ -6,6 +6,7 @@ import controlePonto.funcionario.Operador;
 import controlePonto.funcionario.Secretaria;
 import controlePonto.ponto.RegistroPonto;
 
+
 public class GerenciarControlePonto {
 
     public static final int TEMPO = 1000;
@@ -41,6 +42,14 @@ public class GerenciarControlePonto {
         Thread.sleep(TEMPO);
         registrarPontoSaída(regSecretaria);
 
+        RegistroPonto regGerente2 = new RegistroPonto();
+        registrarPontoEntrada(gerente,regGerente2);
+
+        apresentarRegistrosFuncionario(gerente); //Apresenta todos registros de um funcionario
+    }
+
+    private static void apresentarRegistrosFuncionario(Funcionario funcionario) {
+        System.out.println(funcionario.getListaPonto());
     }
 
     public static void registrarPontoEntrada(Funcionario funcionario, RegistroPonto registroPonto){

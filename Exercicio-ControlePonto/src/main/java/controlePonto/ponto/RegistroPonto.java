@@ -1,6 +1,7 @@
 package controlePonto.ponto;
 
 import controlePonto.funcionario.Funcionario;
+import controlePonto.util.SemFuncionarioException;
 import controlePonto.util.SemRegistroEntradaException;
 import lombok.Data;
 
@@ -24,11 +25,13 @@ public class RegistroPonto {
         func = funcionario;
         dataRegistro = LocalDate.now();
         horaEntrada = LocalDateTime.now();
+        adicionaNoLog();
     }
 
     public void registraSaida(){
         verificaSePossuiEntrada();
         horaSaida = LocalDateTime.now();
+        adicionaNoLog();
     }
 
     public void apresentarRegistroPonto(){
@@ -54,6 +57,14 @@ public class RegistroPonto {
         return data.format(formatter);
     }
 
+    private void adicionaNoLog() {
+        if(func != null){
+            func.getListaPonto().add(this);
+            return;
+        }
+        throw new SemFuncionarioException();
+    }
+
     private String getTipoFuncionarioENome(Funcionario funcionario){
         if(funcionario == null){
             return "Funcionário Não Encontrado";
@@ -68,5 +79,12 @@ public class RegistroPonto {
         throw new SemRegistroEntradaException();
     }
 
-
+    @Override
+    public String toString() {
+        return "RegistroPonto " + func.getNome() +
+                "\nId: " + idRegPonto +
+                "\nData Registro: " + formatarData(dataRegistro) +
+                "\nHora Entrada: " + formatarHora(horaEntrada) +
+                "\nHora Saída: " + formatarHora(horaSaida) + "\n";
+    }
 }
