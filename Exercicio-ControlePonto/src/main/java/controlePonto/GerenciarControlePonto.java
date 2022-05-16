@@ -35,11 +35,11 @@ public class GerenciarControlePonto {
 
         //Registrando as Saídas dos Funcionários
 
-        registrarPontoSaída(gerente, regGerente);
+        registrarPontoSaída(regGerente);
         Thread.sleep(TEMPO);
-        registrarPontoSaída(operador, regOperador);
+        registrarPontoSaída(regOperador);
         Thread.sleep(TEMPO);
-        registrarPontoSaída(secretaria, regSecretaria);
+        registrarPontoSaída(regSecretaria);
 
     }
 
@@ -48,8 +48,8 @@ public class GerenciarControlePonto {
         registroPonto.apresentarRegistroPonto();
     }
 
-    public static void registrarPontoSaída(Funcionario funcionario, RegistroPonto registroPonto){
-        registroPonto.registraSaida(funcionario);
+    public static void registrarPontoSaída(RegistroPonto registroPonto){
+        registroPonto.registraSaida();
         registroPonto.apresentarRegistroPonto();
     }
 

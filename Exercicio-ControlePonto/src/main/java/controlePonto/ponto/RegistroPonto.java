@@ -1,6 +1,7 @@
 package controlePonto.ponto;
 
 import controlePonto.funcionario.Funcionario;
+import controlePonto.util.SemRegistroEntradaException;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -25,9 +26,8 @@ public class RegistroPonto {
         horaEntrada = LocalDateTime.now();
     }
 
-    public void registraSaida(Funcionario funcionario){
-        func = funcionario;
-        dataRegistro = LocalDate.now();
+    public void registraSaida(){
+        verificaSePossuiEntrada();
         horaSaida = LocalDateTime.now();
     }
 
@@ -60,5 +60,13 @@ public class RegistroPonto {
         }
         return funcionario.getClass().getSimpleName()+" "+funcionario.getNome();
     }
+
+    private void verificaSePossuiEntrada(){
+        if(horaEntrada != null){
+            return;
+        }
+        throw new SemRegistroEntradaException();
+    }
+
 
 }
